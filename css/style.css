@@ -1,0 +1,24 @@
+:root {
+    --color-white-cream: #FFF9F2;
+    --color-white: #fff;
+    --color-accent: #2C3E50;
+    --color-unaccent: #7F8C8D;
+    --color-red-light: #F1948A;
+
+
+    --spacing-small: 10px;
+    --spacing-medium: 15px;
+    --spacing-large: 30px;
+
+    --box-shadow: 0 2px 8px rgba(231, 76, 60, 0.1);
+    --linear-gradient: linear-gradient(to right, #E74C3C, #F39C12);
+}
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+    background-color: var(--color-white-cream);
+}
