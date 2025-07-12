@@ -59,6 +59,3 @@
 .products-element__btn:hover {
     opacity: 0.8;
 }
-.products-element__btn_active {
-    background: var(--color-red-leght);
-}
