@@ -12,6 +12,7 @@
 
     --box-shadow: 0 2px 8px rgba(231, 76, 60, 0.1);
     --linear-gradient: linear-gradient(to right, #E74C3C, #F39C12);
+    --linear-gradient-dark: linear-gradient(to right, #c0392b, #d35400);
 }
 * {
     box-sizing: border-box;
