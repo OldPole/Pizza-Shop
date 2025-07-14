@@ -5,12 +5,12 @@
     --color-unaccent: #7F8C8D;
     --color-red-light: #F1948A;
 
-
     --spacing-small: 10px;
     --spacing-medium: 15px;
     --spacing-large: 30px;
 
     --box-shadow: 0 2px 8px rgba(231, 76, 60, 0.1);
+    --shadow: rgba(0, 0, 0, 0.5);
     --linear-gradient: linear-gradient(to right, #E74C3C, #F39C12);
     --linear-gradient-dark: linear-gradient(to right, #c0392b, #d35400);
 }

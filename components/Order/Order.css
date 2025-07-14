@@ -5,7 +5,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: var(--shadow);
 }
 .order-container {
     position: fixed;
@@ -28,7 +28,7 @@
     height: 35px;
     top: 28px;
     right: 28px;
-    background-image: url(/img/close.png);
+    background-image: url(/components/Order/img/close.png);
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -77,12 +77,12 @@
     background: var(--linear-gradient);
     color: var(--color-white);
     cursor: pointer;
-    transition: opacity 0.3s;
+    transition: filter 0.3s;
     font-size: 16px;
     box-shadow: var(--box-shadow);
 }
-.order__btn:hover, .size-option:hover {
-    opacity: 0.8;
+.order__btn:hover, .size-option:hover, .base-option:hover {
+    filter: brightness(0.9);
 }
 .size-optin_active, .base-option_active {
     background: var(--linear-gradient-dark);

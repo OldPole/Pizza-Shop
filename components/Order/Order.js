@@ -5,6 +5,12 @@ class Order {
         this.keyBase = 'Традиционное';
     }
 
+    addToCart (id, size, base) {
+        localStorageUtil.putProduct(id, size, base);
+        this.handleClear();
+        headerPage.render(localStorageUtil.getCount());
+    }
+
     handleClear() {
         ROOT_ORDER.innerHTML = '';
     }
@@ -32,7 +38,7 @@ class Order {
                         <button class="base-option ${this.keyBase === 'Традиционное' ? 'base-option_active' : ''}" data-base="Традиционное">Традиционное</button>
                         <button class="base-option ${this.keyBase === 'Тонкое' ? 'base-option_active' : ''}" data-base="Тонкое">Тонкое</button>
                     </div>
-                    <button class="order__btn" onclick="orderPage.handleClear();">В корзину за ${product.prices[index] + ' BYN'}</button>
+                    <button class="order__btn" onclick="orderPage.addToCart('${id}', '${this.keySize}', '${this.keyBase}');">В корзину за ${product.prices[index] + ' BYN'}</button>
                 </div>
             </div>
         </div>

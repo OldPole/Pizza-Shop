@@ -18,7 +18,7 @@
 }
 .products-element:hover {
     transform: translateY(-5px);
-    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);;
+    box-shadow: 0 2px 8px rgba(231, 76, 60, 0.3);
 }
 .products-element__img {
     width: 100%;
