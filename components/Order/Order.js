@@ -11,8 +11,22 @@ class Order {
         headerPage.render(localStorageUtil.getCount());
     }
 
-    handleClear() {
+    handleClear () {
         ROOT_ORDER.innerHTML = '';
+    }
+
+    handleSizeClick (id, newSize) {
+        if (this.keySize !== newSize) {
+            this.keySize = newSize;
+            this.render(id);
+        }
+    }
+
+    handleBaseClick (id, newBase) {
+        if (this.keyBase !== newBase) {
+            this.keyBase = newBase;
+            this.render(id);
+        }
     }
 
     render(id) {
@@ -30,13 +44,13 @@ class Order {
                     <span class="order__info">${this.keySize + ', ' + product.weights[index] + ' г' + ', ' + this.keyBase + ' тесто'}</span>
                     <p class="order__ingredients">${product.ingredients}</p>
                     <div class="order__options">
-                        <button class="size-option ${this.keySize === '25 см' ? 'size-optin_active' : ''}" data-size="25 см">25 см</button>
-                        <button class="size-option ${this.keySize === '30 см' ? 'size-optin_active' : ''}" data-size="30 см">30 см</button>
-                        <button class="size-option ${this.keySize === '35 см' ? 'size-optin_active' : ''}" data-size="35 см">35 см</button>
+                        <button class="size-option ${this.keySize === '25 см' ? 'size-option_active' : ''}" onclick="orderPage.handleSizeClick('${id}', '25 см');">25 см</button>
+                        <button class="size-option ${this.keySize === '30 см' ? 'size-option_active' : ''}" onclick="orderPage.handleSizeClick('${id}', '30 см');">30 см</button>
+                        <button class="size-option ${this.keySize === '35 см' ? 'size-option_active' : ''}" onclick="orderPage.handleSizeClick('${id}', '35 см');">35 см</button>
                     </div>
                     <div class="order__options">
-                        <button class="base-option ${this.keyBase === 'Традиционное' ? 'base-option_active' : ''}" data-base="Традиционное">Традиционное</button>
-                        <button class="base-option ${this.keyBase === 'Тонкое' ? 'base-option_active' : ''}" data-base="Тонкое">Тонкое</button>
+                        <button class="base-option ${this.keyBase === 'Традиционное' ? 'base-option_active' : ''}" onclick="orderPage.handleBaseClick('${id}', 'Традиционное');">Традиционное</button>
+                        <button class="base-option ${this.keyBase === 'Тонкое' ? 'base-option_active' : ''}" onclick="orderPage.handleBaseClick('${id}', 'Тонкое');">Тонкое</button>
                     </div>
                     <button class="order__btn" onclick="orderPage.addToCart('${id}', '${this.keySize}', '${this.keyBase}');">В корзину за ${product.prices[index] + ' BYN'}</button>
                 </div>
@@ -45,28 +59,6 @@ class Order {
         `;
 
         ROOT_ORDER.innerHTML = html;
-
-        document.querySelectorAll('.size-option').forEach(element => {
-            element.addEventListener('click', event => {
-                const newSize = event.target.dataset.size;
-
-                if ( newSize !== this.keySize) {
-                    this.keySize = newSize;
-                    this.render(id);
-                }
-            })
-        });
-
-        document.querySelectorAll('.base-option').forEach(element => {
-            element.addEventListener('click', event => {
-                const newBase = event.target.dataset.base;
-
-                if (newBase !== this.keyBase) {
-                    this.keyBase = newBase;
-                    this.render(id);
-                }
-            })
-        });
     }
 }
 

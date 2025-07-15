@@ -1,20 +1,28 @@
 class Shopping {
 
-    handleClear() {
+    handleClear () {
         ROOT_SHOPPING.innerHTML = '';
     }
 
-    updateCount(id, size, base, newCount) {
-        if (newCount <= 0) {
+    updateCount (id, size, base, newCount) {
+        if (newCount === 0) {
             localStorageUtil.removeProduct(id, size, base);
             this.render();
+            headerPage.render(localStorageUtil.getCount());
         } else {
             localStorageUtil.updateCount(id, size, base, newCount)
             this.render();
+            headerPage.render(localStorageUtil.getCount());
         }
     }
 
-    render() {
+    removeShoppingItem (id, size, base) {
+            localStorageUtil.removeProduct(id, size, base);
+            this.render();
+            headerPage.render(localStorageUtil.getCount());
+    }
+
+    render () {
         const products = localStorageUtil.getProducts();
         let htmlShopping = '';
         let totalPrice = 0;
@@ -28,19 +36,21 @@ class Shopping {
             htmlShopping += `
                 <div class="shopping-item">
                     <div class="shopping-item__content">
-                        <img class="shopping-item__img" src=${product.img}></img>
-                        <div class="shopping-item__info">
-                            <h3>${product.name}</h3>
-                            <span>${size + ', ' + base + ' тесто'}</span>
+                        <div class="shopping-item__wrapper">
+                            <img class="shopping-item__img" src=${product.img}></img>
+                            <div class="shopping-item__info">
+                                <h3 class="shopping-item__name">${product.name}</h3>
+                                <span class="shopping-item__characteristics">${size + ', ' + base + ' тесто'}</span>
+                            </div>
                         </div>
-                        <div class="shopping-item__btn-close"></div>
+                        <div class="shopping-item__remove-btn" onclick="shoppingPage.removeShoppingItem('${id}', '${size}', '${base}');"></div>
                     </div>
-                    <div class="shopping-item__price">
-                        <span class=""></span>
+                    <div class="shopping-item__total-price">
+                        <span class="shopping-item__price">${product.prices[priceIndex] * count + ' BYN'}</span>
                         <div class="shopping-item__controls">
-                            <button onclick="shoppingPage.updateCount('${id}', '${size}', '${base}', ${count + 1})">+</button>
-                            <span>${count}</span>
-                            <button onclick="shoppingPage.updateCount('${id}', '${size}', '${base}', ${count - 1})">-</button>
+                            <button class="shopping-item__btn" onclick="shoppingPage.updateCount('${id}', '${size}', '${base}', ${count - 1})">−</button>
+                            <span class="shopping-item__counter">${count}</span>
+                            <button class="shopping-item__btn" onclick="shoppingPage.updateCount('${id}', '${size}', '${base}', ${count + 1})">+</button>
                         </div>
                     </div>
                 </div>
@@ -48,14 +58,19 @@ class Shopping {
         });
 
         const html = `
-            <div class="shopping-overlay" onclick="shoppingPage.handleClear();">
+            <div class="shopping-overlay">
                 <div class="shopping-container">
-                    <h1 class="shopping-title">${localStorageUtil.getCount() + ' товаров на ' + totalPrice + ' BYN'}</h1>
-                    ${htmlShopping || 'Корзина пуста'}
+                    <div class="shopping-wrapper">
+                        <div class="shopping__header">
+                            <h1 class="shopping__title">${localStorageUtil.getCount() + ' товаров на ' + totalPrice.toFixed(2)} BYN</h1>
+                            <div class="shopping__close-btn" onclick="shoppingPage.handleClear();"></div>
+                        </div>
+                        ${htmlShopping || 'Корзина пуста'}
+                    </div>
                     <div class="shopping-totals">
                         <div class="shopping__total-price">
                             Сумма заказа
-                            <span>${totalPrice}</span>
+                            <span>${totalPrice.toFixed(2)} BYN</span>
                         </div>
                         <button class="shopping__order-btn">К оформлению заказа</button>
                     </div>
@@ -68,4 +83,3 @@ class Shopping {
 }
 
 const shoppingPage = new Shopping();
-shoppingPage.render();
