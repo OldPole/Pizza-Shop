@@ -46,7 +46,7 @@ class Shopping {
                         <div class="shopping-item__remove-btn" onclick="shoppingPage.removeShoppingItem('${id}', '${size}', '${base}');"></div>
                     </div>
                     <div class="shopping-item__total-price">
-                        <span class="shopping-item__price">${product.prices[priceIndex] * count + ' BYN'}</span>
+                        <span class="shopping-item__price">${(product.prices[priceIndex] * count).toFixed(2)}  BYN</span>
                         <div class="shopping-item__controls">
                             <button class="shopping-item__btn" onclick="shoppingPage.updateCount('${id}', '${size}', '${base}', ${count - 1})">−</button>
                             <span class="shopping-item__counter">${count}</span>

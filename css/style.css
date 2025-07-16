@@ -15,6 +15,11 @@
     --linear-gradient: linear-gradient(to right, #E74C3C, #F39C12);
     --linear-gradient-dark: linear-gradient(to right, #c0392b, #d35400);
 }
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-grey);
+}
+
 * {
     box-sizing: border-box;
     margin: 0;

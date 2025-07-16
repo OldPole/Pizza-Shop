@@ -1,17 +1,20 @@
 function render() {
     productsPage.render();
     headerPage.render(localStorageUtil.getCount());
-    shoppingPage.render();
 }
 
 let CATALOG = [];
+
+spinner.render();
 
 fetch('server/catalog.json')
     .then(res => res.json())
     .then(body => {
         CATALOG = body;
+        spinner.handleClear();
         render();
     })
-    .catch(error => {
-        console.log(error)
+    .catch(() => {
+        spinner.handleClear();
+        error.render();
     });
